@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Pegando as os arquivos que serão utilizas na verificação
-df_cont = pd.read_csv("C:/Users/raflo/OneDrive/Área de Trabalho/Controle de envios.csv", on_bad_lines='skip', sep=";")
-df_hyst = pd.read_csv("C:/Users/raflo/OneDrive/Área de Trabalho/TRACKING_HYST_2024_09_26.csv", sep=";")
+df_cont = pd.read_csv(".../Controle de envios.csv", on_bad_lines='skip', sep=";")
+df_hyst = pd.read_csv(".../X_2024_09_26.csv", sep=";")
 
 # Removendo todas as empresas que não enviaram o relatório semanal
 df_cont = df_cont[~df_cont['Status'].isin(['NÃO RECEBIDO'])]
@@ -14,15 +14,15 @@ df_cont = df_cont.dropna(axis=0)
 df_cont['COD CLIENTE'] = df_cont['COD CLIENTE'].astype(int)
 
 # Mesma coisa da parte de cima, só que nesse não tem valores em brancos que estçao atrapalhando
-df_hyst = df_hyst[['Cod. Cliente', 'Varejo']]
-df_hyst['Cod. Cliente'] = df_hyst['Cod. Cliente'].astype(int)
+df_x = df_x[['Cod. Cliente', 'Varejo']]
+df_x['Cod. Cliente'] = df_x['Cod. Cliente'].astype(int)
 
 # criando um dicionário pra receber o resultado das buscas
 resultados = []
 
-# Nesse bloco será realizado a busca dos códigos dos clientes na planilha HYST e vai verificar se eles estão corretos, comparando
+# Nesse bloco será realizado a busca dos códigos dos clientes na planilha X e vai verificar se eles estão corretos, comparando
 # na planilha controle de envio, que possuí os códigos correto
-for _, row in df_hyst.iterrows():
+for _, row in df_x.iterrows():
     cod_cliente = row['Cod. Cliente']
     varejo = row['Varejo']
 
